@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="col-12">
+    <div class="card" style="">
+        <div class="card-body">
+          <h5 class="card-title">جستجو</h5>
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          <form method="POST" action="" class="form-inline">
+            {{ form.hidden_tag() }}
+                
+                
+                    <!-- {{ form.word.label(class="form-control-label ") }} : -->
+                   
+                    {% if form.word.errors %}
+                        {{ form.word(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.word(class="form-control form-control col-9") }}
+                    {% endif %}
+
+                    {{ form.submit(class="btn btn-outline-info") }}
+                
+              
+            
+            </form>
+            <hr>
+            <p>{{g_trans.text}}</p>
+            <!-- use accordion : https://getbootstrap.com/docs/4.0/components/collapse/#accordion-example -->
+    
+
+        <div id="accordion">
+            {% if res_words %}
+            {% for word in res_words %}
+            <div class="card">
+              <div class="card-header" id="heading_{{loop.index}}">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_{{loop.index}}" aria-expanded="false" aria-controls="collapse_{{loop.index}}">
+                    معنی کلمه {{word.word}} :‌ 
+                  </button>
+                </h5>
+              </div>
+          
+              <div id="collapse_{{loop.index}}" class="collapse " aria-labelledby="heading_{{loop.index}}" data-parent="#accordion">
+                <div class="card-body">
+                    <p style='text-align:left'>{{word.translation}}</p>
+                    <br>
+                    مثال :
+                    <ul style='text-align:left;direction:ltr'>
+                        {% for example in word.examples %}
+                            <li style='text-align:left'>{{example.example}}</li>
+                        {% endfor %}
+                    </ul>
+                    
+                    <hr>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            
+        </div>
+
+        </div>
+      </div>
+  </div>
+
+ 
+{% endblock content %}

@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+    
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -44,3 +45,28 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
+
+class Word(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    word = db.Column(db.String(500), nullable=False)
+    translation = db.Column(db.String(500), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    examples = db.relationship('Example',backref=db.backref('word', lazy=True))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Word('{self.word}')"
+
+
+
+class Example(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    example = db.Column(db.String(1000), nullable=False)
+    translation = db.Column(db.String(1000), nullable=True)
+    word_id = db.Column(db.Integer,db.ForeignKey('word.id'),nullable=False)
+    # word = db.relationship('Word',backref=db.backref('word_obj', lazy='dynamic'))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Example('{self.example}')"
