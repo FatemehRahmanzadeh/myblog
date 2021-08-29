@@ -18,4 +18,4 @@ python run.py
 - [ ] user freindly create post (add editor)
 - [ ] add cover image to post
 - [ ] add myword part 
-- [ ] add admin user admin who cat edit and delete any posts
+- [ ] add admin user admin who can edit and delete any posts
