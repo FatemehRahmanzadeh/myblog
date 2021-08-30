@@ -14,7 +14,7 @@
         {% endif %}
       </div>
       <h2 class="article-title">{{ post.title }}</h2>
-      <p class="article-content">{{ post.content }}</p>
+      <pre class="article-content">{{ post.content|safe }}</pre>
     </div>
   </article>
   <!-- Modal -->

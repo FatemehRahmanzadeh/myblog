@@ -7,10 +7,17 @@
   font-family: blogFont;
 }
 
+/* a,p,span {
+  text-align : right;
+} */
+
 body {
   direction:  rtl;
-  /* font-family: dordaneh; */
-  text-align : right;
+  /* unicode-bidi: bidi-override !important;
+  direction: unset !important; */
+  text-align:right;
+
+  /*  */
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
@@ -89,4 +96,11 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 2.5rem;
+}
+
+
+.hljs {
+  text-align: left !important;
+  direction: ltr !important;
+  width: 95%;
 }
